@@ -1,4 +1,5 @@
 <?php
+//Ä¿¹Ô Å×½ºÆ®
 $name="nari";
 echo $name."<BR>";
 echo "hello<BR>";
