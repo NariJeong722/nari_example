@@ -8,9 +8,18 @@ if (mysqli_connect_errno ()) {
 } else
 	echo "[connection OK]<br>";
 
-$query = $mysqli->prepare( "select id from member where id like '%?%'" );
-$query->bind_Param( s, $_POST[insertUser] );
-$result=$query->execute ();
+
+$sLikeString = '%'.$_POST[insertUser].'%';
+
+$query = $mysqli->prepare( "select id from member where id like ?" );
+$query->bind_param( 's', $sLikeString );
+$query->execute ();
+$query->bind_result($id);
+
+while($query->fetch()){
+	echo $id."<br>";
+}
+exit;
 
 
 if (!$result) {
