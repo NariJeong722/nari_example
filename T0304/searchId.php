@@ -6,7 +6,7 @@ mysqli_set_charset ( $mysqli, "SET CHARACTER SET 'utf8'" );
 if (mysqli_connect_errno ()) {
 	echo ("connect fail:::" . mysqli_connect_error ());
 } else
-	echo "[connection OK]<br>";
+	echo "[connection OKkk]<br>";
 
 
 $sLikeString = '%'.$_POST[insertUser].'%';
