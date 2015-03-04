@@ -13,7 +13,7 @@ else
 	echo "데이터베이스 mydb가 선택됨<br>";
 
 $query = "select * from member";
-mysql_query ( "SET NAMES euckr" ); // 한글셋팅;
+mysql_query("SET NAMES utf8"); // 한글셋팅;
 $result = mysql_query ( $query );
 if (! $result)
 	die ( "[SQL error]" . mysql_error () );

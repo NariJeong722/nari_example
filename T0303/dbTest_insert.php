@@ -11,6 +11,8 @@
 </html>
 
 <?php
+
+
 $dbconnect = mysql_connect ( "localhost", "scott", "tiger" );
 
 if (! $dbconnect) {
@@ -25,7 +27,7 @@ else
 	echo "데이터베이스 mydb가 선택됨<br>";
 $insertQuery="insert into member(id, name, age, email) 
 		values('".$_POST[id]."','".$_POST[name]."',".$_POST[age].",'".$_POST[email]."')";
-mysql_query ( "SET NAMES euckr" );
+mysql_query("SET NAMES utf8");
 $insertResult=mysql_query($insertQuery);
 if(!$insertResult){
 	die("[insert error]".mysql_error());
