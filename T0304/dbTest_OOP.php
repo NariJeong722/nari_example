@@ -7,10 +7,6 @@
 	function confirmDB(){
 		window.open("dbTest.php");
 	}
-/* 	function searchId(){
-		var id=document.insertUser.value;	
-		location.href="searchId.php?id="+id;
-	} */
 
 /* 	function searchID(insertUser){
 		if(insertUser.length==0){
@@ -28,7 +24,7 @@
 				document.getElementById("selecetedId").innerHTML=xmlhttp.responseText;
 			}
 		}
-		xmlhttp.open("POST","dbTest_OOP?id="+insertUser,true);
+		xmlhttp.open("GET","dbTest_OOP?id="+insertUser,true);
 		xmlhttp.send();
 	} */
 	</script>
@@ -36,7 +32,7 @@
 <?php
 // DB연결시작
 $mysqli = new mysqli ( "localhost", "scott", "tiger", "mydb" );
-$mysqli->autocommit ( false );
+$mysqli->autocommit (false);
 mysqli_set_charset ( $mysqli, "SET CHARACTER SET 'utf8'" );
 if (mysqli_connect_errno ()) {
 	echo ("connect fail:::" . mysqli_connect_error ());
