@@ -12,6 +12,7 @@ class ExampleDao{
 		return ExampleDao::$oExampleDao;
 	}
 
+	//
 	public function setDbo($oDbo){
 		$this->oDbo = $oDbo;
 	}
