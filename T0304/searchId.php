@@ -8,12 +8,11 @@ if (mysqli_connect_errno ()) {
 } else
 	echo "[connection OKkk]<br>";
 
-
 $sLikeString = '%'.$_POST[insertUser].'%';
 
 $query = $mysqli->prepare( "select id from member where id like ?" );
 $query->bind_param( 's', $sLikeString );
-$query->execute ();
+$query->execute();
 $query->bind_result($id);
 
 while($query->fetch()){
@@ -21,8 +20,7 @@ while($query->fetch()){
 }
 exit;
 
-
-if (!$result) {
+/* if (!$result) {
 	$fieldNum = mysqli_num_fields ( $result );
 	$finfo = $result->fetch_fields ();
 	foreach ( $finfo as $val ) {
@@ -48,7 +46,7 @@ while ( $row = mysqli_fetch_array ( $result ) ) {
 	}
 	echo "</tr>";
 }
-echo "</table>";
+echo "</table>"; */
 
 $query->close ();
 $mysqli->close ();
