@@ -15,7 +15,7 @@ $aExampleList = $oExampleService->findExample($oCommand);
 
 print_r($aExampleList);
 
-//-----------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
 $mMemberService = MemberService::getInstance();
 $mMemberDao = MemberDao::getInstance();
 $mMemberService->setMemberDao($mMemberDao);
