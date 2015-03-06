@@ -31,7 +31,7 @@ class ExampleDao{
 
 		$stmt->bindValue(':id',$oCommand->getId(),PDO::PARAM_STR);
 
-		if($stmt->execute() === FALSE){
+		if($stmt->execute() === FALSE){//rk
 			$error = $stmt->errorInfo();
 			throw new PDOException('selectExample ['.$error[0].']'.'['.$error[1].'] '.$error[2]);
 		}
