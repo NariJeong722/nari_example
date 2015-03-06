@@ -26,7 +26,7 @@ class Member{
 	}
 	
 	public function getAge(){
-		$this->mAge;
+		return $this->mAge;
 	}
 	
 	public function setEmail($mEmail){

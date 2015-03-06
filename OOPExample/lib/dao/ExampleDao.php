@@ -31,14 +31,21 @@ class ExampleDao{
 
 		$stmt->bindValue(':id',$oCommand->getId(),PDO::PARAM_STR);
 
-		if($stmt->execute() === FALSE){//rk
+		if($stmt->execute() === FALSE){
 			$error = $stmt->errorInfo();
 			throw new PDOException('selectExample ['.$error[0].']'.'['.$error[1].'] '.$error[2]);
 		}
 
 		$aExampleList = array();
 		while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-			$aExampleList[] = $row;
+			$oMember = new Member();
+			
+			$oMember->setId($row['id']);
+			$aExampleList[] = $oMember;
+		}
+		
+		foreach($aExampleList as $oMember){
+			echo $o;
 		}
 
 		return $aExampleList;
