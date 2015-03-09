@@ -1,11 +1,6 @@
-<html>
-<head><meta charset="UTF-8"></head>
-<body>
-
-</body>
-</html>
 <?php
-require_once './lib/MemberService2.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Example/OOPExample/lib/MemberService2.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Example/OOPExample/util/template.php';
 $memberService2 = MemberService2::getInstance();
 $memberDao2 = MemberDao2::getInstance();
 
@@ -13,19 +8,27 @@ $servername = "localhost";
 $username="scott";
 $password="tiger";
 
-$conn= new PDO("mysql:host=$servername;dbname=mydb", $username,$password);
-$memberDao2->seDbo($conn);
+$conn= new PDO("mysql:host=$servername;dbname=mydb", $username, $password);
+$memberDao2->setDbo($conn);
 
-$memberService2->setMemberDao2($memberDao);
+$memberService2->setMemberDao2($memberDao2);
 $member = new Member();
-$memberList = $memberService2->setMemberDao2($_POST[search1],$_POST[search2],$_POST[search3]);
-print_r($memberList);
-		
-echo "<tr>";
-echo "<td>Nari</td>";
-echo "<td>정나리</td>";
-echo "<td>26</td>";
-echo "<td>nari@email.com</td>";		
-echo "</tr>";
 
+if($_GET['column'] == 'name'){
+	$member->setName($_GET['keyword']);
+}else{
+	$member->setId($_GET['keyword']);
+}
+
+$recordNum = $memberService2->recordNum();
+
+
+
+$memberList = $memberService2->selectMember($_GET['option'],$_GET['column'],$member);
+
+$oTpl = new Template($_SERVER['DOCUMENT_ROOT'].'/Example/OOPExample/tpl/');
+
+$oTpl->set('memberList',$memberList);
+
+echo $oTpl->fetch('templateExample.tpl.php');
 ?>

@@ -1,19 +1,19 @@
 <?php
-require_once './lib/model/member/Member.php';
-require_once './lib/dao/MemberDao2.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Example/OOPExample/lib/model/member/Member.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Example/OOPExample/lib/dao/MemberDao2.php';
 class MemberService2{
-	private  static $templatService;
+	private  static $MemberService2;
 	
 	private $memberDao;
 	
 	public static function getInstance(){
-		if(!isset(MemberService2::$templatService)){
-			MemberService2::$templatService = new MemberService2();
+		if(!isset(MemberService2::$MemberService2)){
+			MemberService2::$MemberService2 = new MemberService2();
 		}
-		return MemberService2::$templatService;
+		return MemberService2::$MemberService2;
 	}
 	
-	public function setMemberDao2(MemberDao2 $memberDao){
+	public function setMemberDao2(MemberDao2 $memberDao){	
 		$this->memberDao=$memberDao;
 	}
 	
@@ -24,6 +24,11 @@ class MemberService2{
 			print_r($e);
 		}
 		return $memberList;
+	}
+	
+	public function recordNum(){
+		$recordNum = $this->memberDao->recordNum();
+		return $recordNum;
 	}
 }
 

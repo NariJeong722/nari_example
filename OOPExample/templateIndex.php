@@ -2,8 +2,8 @@
 <head></head>
 <body>
 
-	<form action="./ajax/TemplateController.php" method="post">
-		<div id="searchDiv">
+	<form onsubmit="return false;">
+		<div id="searchDiv" >
 			<select id="search1">
 				<option value="0"> 검색방법 </option>
 				<option value="equal"> = </option>
@@ -15,7 +15,7 @@
 				<option value="id">아이디</option>
 			</select>
 				<input type="text" name="search3" id="search3">
-				<input type="submit" name="searchBtn" id="searchBtn" value="검색">
+				<input type="button" name="searchBtn" id="searchBtn" value="검색">
 		</div>
 		<br>
 		<table border="1" width="800">
@@ -36,14 +36,30 @@
 	
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	 <script type="text/javascript">
-		$(document).ready(function(){
-			
-/* 			$.post("/Example/OOPExample/ajax/TemplateController.php",function(){
-					$('tbody').
-				} */		
- 			$('tbody').load("/Example/OOPExample/ajax/TemplateController.php"); 
-			
+		$(document).ready(function(){				
+ 			$('tbody').load("/Example/OOPExample/ajax/TemplateController.php");
+
+	 		$("#search3").keypress(function(e){
+		 		if(e.keyCode == 13){ //enter : 13
+		 			clickBtn();
+		 		}
+	 		});
+
+			$("#searchBtn").click(function(){
+				clickBtn();
+			});
 		});
+
+		function clickBtn(){
+			var getData = {
+					"option":$("#search1").val(),
+					"column":$("#search2").val(),
+					"keyword":$("#search3").val()				
+				};
+				$.get("/Example/OOPExample/ajax/TemplateController.php",getData,function(data){
+					$("tbody").html(data);
+				});	
+			}
 	</script>	
 	
 </body>

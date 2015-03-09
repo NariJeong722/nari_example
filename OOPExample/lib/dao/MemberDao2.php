@@ -3,7 +3,7 @@ class MemberDao2{
 	private static $memberDao;
 	private $dbo;
 	public static function getInstance(){
-		if($isset (MemberDao2::$memberDao)){
+		if(!isset (MemberDao2::$memberDao)){
 			MemberDao2::$memberDao = new MemberDao2();
 		}
 		return MemberDao2::$memberDao;
@@ -26,6 +26,7 @@ class MemberDao2{
 					1=1					
 			';
 			
+			
 			$aCondition = array();
 			$aBindParam = array();
 			
@@ -40,10 +41,10 @@ class MemberDao2{
 			}else if($option == 'equal'){
 				if($column == 'name'){
 					$aCondition[] = 'AND name = :name';
-					$aBindParam[':name'] = array('%'.$member->getName().'%', PDO::PARAM_STR);
+					$aBindParam[':name'] = array($member->getName(), PDO::PARAM_STR);
 				}else if($column == 'id'){
 					$aCondition[] = 'AND id = :id';
-					$aBindParam[':id'] = array('%'.$member->getId().'%', PDO::PARAM_STR);
+					$aBindParam[':id'] = array($member->getId(), PDO::PARAM_STR);
 				}
 			}
 			
@@ -63,13 +64,50 @@ class MemberDao2{
 			
 			$memberList = array();
 			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-				$memberList[] = $row;
+				$oMember = new Member();
+				$oMember->setAge($row['age']);
+				$oMember->setId($row['id']);
+				$oMember->setName($row['name']);
+				$oMember->setEmail($row['email']);
+				$memberList[] = $oMember;
 			}
 			
 		} catch (PDOException $e){
 			echo 'selectMember['.$error[0].'] ['.$error[1] .'] ['.$error[2],']';
 		}
 		return $memberList;
+	}
+	
+	
+	public function recordNum(){
+		$query = '
+				SELECT
+					count(*)
+				FROM
+					member		
+				';
+		
+		$stmt = $this->dbo->prepare($query);
+		$stmt->execute();
+		
+		$recordNum= $stmt->fetchColumn();		
+		$aPage=5;
+		$aBlock=5;	
+		$totalPage = ceil($recordNum/$aPage);	
+		$totalblock = ceil($recordNum/$aPage/$aBlock);
+		$lastPage=ceil($recordNum/$aPage)+1;
+		
+		$pageing = array();
+		
+		
+		
+		
+		
+		echo $lastPage;
+		exit;
+		
+		return $recordNum;
+	
 	}
 	
 }
