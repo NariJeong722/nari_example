@@ -1,6 +1,7 @@
 <html>
 <head></head>
 <body>
+
 <form action="" method="post">
 	<div id="searchDiv">
 		<select id="search1">
@@ -18,15 +19,20 @@
 	</div>
 	<br>
 	<table border="1" width="800">
+	<thead>
 		<tr align="center">
 			<td>아이디</td>
 			<td>이름</td>
 			<td>나이</td>
 			<td>이메일</td>
 		</tr>
+	</thead>
+	<tbody>
 		<tr>
 		</tr>
+	</tbody>
 	</table>
 </form>
+
 </body>
 </html>
