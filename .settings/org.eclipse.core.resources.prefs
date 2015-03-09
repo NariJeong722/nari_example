@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//OOPExample/ajax/TemplateController.php=UTF-8
+encoding//OOPExample/lib/MemberService2.php=UTF-8
 encoding//OOPExample/lib/dao/MemberDao.php=UTF-8
+encoding//OOPExample/lib/dao/MemberDao2.php=UTF-8
 encoding//OOPExample/lib/model/member/Member.php=UTF-8
 encoding//OOPExample/lib/view/inserForm.php=UTF-8
 encoding//OOPExample/memberIndex.php=UTF-8

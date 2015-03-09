@@ -2,7 +2,7 @@
 <head></head>
 <body>
 
-	<form action="" method="post">
+	<form action="./ajax/TemplateController.php" method="post">
 		<div id="searchDiv">
 			<select id="search1">
 				<option value="0"> 검색방법 </option>
@@ -28,16 +28,21 @@
 				</tr>
 			</thead>
 		
-			<tbody id="id">
+			<tbody>
 			</tbody>
 		
 		</table>
 	</form>
 	
-	 <script src="//code.jquery.com/jquery-1.10.2.js"></script>	
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	 <script type="text/javascript">
 		$(document).ready(function(){
-			$('tbody').load("/Example/OOPExample/ajax/TemplateController.php");
+			
+/* 			$.post("/Example/OOPExample/ajax/TemplateController.php",function(){
+					$('tbody').
+				} */		
+ 			$('tbody').load("/Example/OOPExample/ajax/TemplateController.php"); 
+			
 		});
 	</script>	
 	
