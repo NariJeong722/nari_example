@@ -15,7 +15,8 @@ class MemberDao2{
 		$dbo->query("SET NAMES utf8");
 	}
 	
-	public function selectMember($option, $column, Member $member){
+	public function selectMember(Command $command){	
+
 		try{
 			$query='
 				SELECT
@@ -26,31 +27,33 @@ class MemberDao2{
 					1=1					
 			';
 			
-			
 			$aCondition = array();
 			$aBindParam = array();
-			
-			if($option == 'like'){
-				if($column == 'name'){
+			if($command->getOption() == 'like'){
+				if($command->getColumn() == 'name'){
 					$aCondition[] = 'AND name LIKE :name';
-					$aBindParam[':name'] = array('%'.$member->getName().'%', PDO::PARAM_STR);
-				}else if($column == 'id'){
+					$aBindParam[':name'] = array('%'.$command->getMember()->getName().'%', PDO::PARAM_STR);
+				}else if($command->getColumn() == 'id'){
 					$aCondition[] = 'AND id LIKE :id';
-					$aBindParam[':id'] = array('%'.$member->getId().'%', PDO::PARAM_STR);
+					$aBindParam[':id'] = array('%'.$command->getMember()->getId().'%', PDO::PARAM_STR);
 				}
-			}else if($option == 'equal'){
-				if($column == 'name'){
+			}else if($command->getOption() == 'equal'){
+				if($command->getColumn() == 'name'){
 					$aCondition[] = 'AND name = :name';
-					$aBindParam[':name'] = array($member->getName(), PDO::PARAM_STR);
-				}else if($column == 'id'){
+					$aBindParam[':name'] = array($command->getMember()->getName(), PDO::PARAM_STR);
+				}else if($command->getColumn() == 'id'){
 					$aCondition[] = 'AND id = :id';
-					$aBindParam[':id'] = array($member->getId(), PDO::PARAM_STR);
+					$aBindParam[':id'] = array($command->getMember()->getId(), PDO::PARAM_STR);
 				}
 			}
 			
 			if(count($aCondition)>0){
 				$query.=implode(' ', $aCondition);
 			}
+						
+			$query.=(' limit '.$command->getOffset().','.$command->getLimit());
+	
+			
 			$stmt = $this->dbo->prepare($query);
 			
 			foreach ($aBindParam as $sKey=>$aParam){
@@ -79,37 +82,26 @@ class MemberDao2{
 	}
 	
 	
-	public function recordNum(){
+	public function recordNum(){ //전체 레코드 수
 		$query = '
 				SELECT
 					count(*)
 				FROM
-					member		
+					member	
+				WHERE 1=1	
 				';
-		
+				
 		$stmt = $this->dbo->prepare($query);
-		$stmt->execute();
-		
-		$recordNum= $stmt->fetchColumn();		
-		$aPage=5;
-		$aBlock=5;	
-		$totalPage = ceil($recordNum/$aPage);	
-		$totalblock = ceil($recordNum/$aPage/$aBlock);
-		$lastPage=ceil($recordNum/$aPage)+1;
-		
-		$pageing = array();
-		
-		
-		
-		
-		
-		echo $lastPage;
-		exit;
-		
-		return $recordNum;
-	
+		$stmt->execute();	
+		$recordNum= $stmt->fetchColumn();
+
+		if($stmt->execute()===FALSE){
+			$error=$stmt->errorInfo();
+			throw new PDOException();
+		}
+		return $recordNum;	
 	}
-	
+
 }
 
 ?>

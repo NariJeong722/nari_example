@@ -3,7 +3,7 @@
 <body>
 
 	<form onsubmit="return false;">
-		<div id="searchDiv" >
+		<div id="searchDiv" align="center">
 			<select id="search1">
 				<option value="0"> 검색방법 </option>
 				<option value="equal"> = </option>
@@ -18,7 +18,7 @@
 				<input type="button" name="searchBtn" id="searchBtn" value="검색">
 		</div>
 		<br>
-		<table border="1" width="800">
+		<!-- <table border="1" width="800">
 			<thead>
 				<tr align="center">
 					<td>아이디</td>
@@ -27,37 +27,41 @@
 					<td>이메일</td>
 				</tr>
 			</thead>
-		
-			<tbody>
-			</tbody>
-		
-		</table>
+		</table> -->
+			<div id="memList" align="center">
+			</div>
+			
+
+
 	</form>
 	
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 	 <script type="text/javascript">
 		$(document).ready(function(){				
- 			$('tbody').load("/Example/OOPExample/ajax/TemplateController.php");
+ 			$("#memList").load("/Example/OOPExample/ajax/TemplateController.php");
+ 			//getMemberList();
 
-	 		$("#search3").keypress(function(e){
-		 		if(e.keyCode == 13){ //enter : 13
-		 			clickBtn();
-		 		}
-	 		});
+			$("#search3").keypress(function(e){
+				if(e.keyCode == 13){
+					getMemberList(1);
+				}
+			});
 
 			$("#searchBtn").click(function(){
-				clickBtn();
+					getMemberList(1);
 			});
 		});
+	
 
-		function clickBtn(){
+		function getMemberList(page){
 			var getData = {
 					"option":$("#search1").val(),
 					"column":$("#search2").val(),
-					"keyword":$("#search3").val()				
+					"keyword":$("#search3").val(),	
+					"page":page			
 				};
 				$.get("/Example/OOPExample/ajax/TemplateController.php",getData,function(data){
-					$("tbody").html(data);
+					$("#memList").html(data);
 				});	
 			}
 	</script>	

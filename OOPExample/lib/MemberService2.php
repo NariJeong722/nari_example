@@ -1,5 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/Example/OOPExample/lib/model/member/Member.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Example/OOPExample/lib/model/command/Command.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Example/OOPExample/lib/dao/MemberDao2.php';
 class MemberService2{
 	private  static $MemberService2;
@@ -17,16 +18,16 @@ class MemberService2{
 		$this->memberDao=$memberDao;
 	}
 	
-	public function selectMember($option, $column, Member $member){
+	public function selectMember(Command $command){
 		try{
-			$memberList = $this->memberDao->selectMember($option, $column, $member);
+			$memberList = $this->memberDao->selectMember($command);
 		}catch (Exception $e){
 			print_r($e);
 		}
 		return $memberList;
 	}
 	
-	public function recordNum(){
+	public function recordNum(){ //전체 레코드 수 
 		$recordNum = $this->memberDao->recordNum();
 		return $recordNum;
 	}
