@@ -19,9 +19,7 @@
 
 				//쿠키삭제
 				$.cookie("isCookie",null);
-				//$.cookie("isCookie", " ",{expire:-1});
-
-				
+				//$.cookie("isCookie", " ",{expire:-1});				
  			});
 		}); 
 	</script>

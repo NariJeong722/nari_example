@@ -19,15 +19,15 @@
 		</div>
 		<br>
 		<!-- <table border="1" width="800">
-			<thead>
-				<tr align="center">
-					<td>아이디</td>
-					<td>이름</td>
-					<td>나이</td>
-					<td>이메일</td>
-				</tr>
-			</thead>
-		</table> -->
+				<thead>
+					<tr align="center">
+						<td>아이디</td>
+						<td>이름</td>
+						<td>나이</td>
+						<td>이메일</td>
+					</tr>
+				</thead>
+			</table> -->
 			<div id="memList" align="center">
 			</div>
 			

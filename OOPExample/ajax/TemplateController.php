@@ -45,16 +45,7 @@ $lastPage=ceil($totalRecord/$aPage)+1; // 전체의 마지막 페이지 수
 $b_startPage=(($curBlock-1)*$aBlock)+1; //블록의 시작페이지
 $b_endPage=($totalPage<$b_startPage+$aPage-1)?$totalPage:$b_startPage+$aPage-1; //블록의 마지막 페이지
 
-
-
-
-
-
-
-
 //---------------------------page 계산 끝-----------------
-
-
 
 $memberList = $memberService2->selectMember($command);
 
@@ -67,10 +58,6 @@ $oTpl->set('totalblock',$totalblock);
 $oTpl->set('curBlock',$curBlock);
 $oTpl->set('b_startPage',$b_startPage);
 $oTpl->set('b_endPage',$b_endPage);
-
-
-
-
 
 echo $oTpl->fetch('templateExample.tpl.php');
 ?>
