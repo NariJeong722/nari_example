@@ -18,17 +18,29 @@ echo "</tr>";
 			echo "<td>{$oMember->getEmail()}</td>";
 			echo "</tr>";
 		}
-		echo "</table>";
+		echo "</table> <br>";
 	}
-
 	echo "<div align='center'>";
-		for($i=1; $i<$totalPage+1; $i++){
-			if($i==$curPage){
-				echo '['."<strong>".$i.'</strong>]   ';
-			}else{
-				echo '['."<a href='#' onclick='getMemberList(".$i."); return false;'>".$i."</a>".']   ';
+ 		if(	$totalPage==0){
+			echo '['."<strong>".'1'.'</strong>]';
+		}else{ 
+			for($i=$b_startPage; $i<$b_endPage+1;$i++){
+				if($i==$b_startPage && $i!=1){
+					echo '['."<a href='#' onclick='getMemberList(".($i-1)."); return false;'>".'pre'."</a>".']  ';
+				}
+				
+				if($i==$curPage){
+					echo '['."<strong>".$i.'</strong>]  ';
+				}else{
+					echo '['."<a href='#' onclick='getMemberList(".$i."); return false;'>".$i."</a>".']   ';
+				}
+			
+				if($i==$b_endPage && $i<$totalPage){
+					echo '['."<a href='#' onclick='getMemberList(".($i+1)."); return false;'>".'next'."</a>".']';
+				}					
 			}
 		}
+				
 	echo "</div>";
 	
 	

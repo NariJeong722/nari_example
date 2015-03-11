@@ -64,6 +64,7 @@
 					$("#memList").html(data);
 				});	
 			}
+
 	</script>	
 	
 </body>
