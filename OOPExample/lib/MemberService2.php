@@ -27,8 +27,8 @@ class MemberService2{
 		return $memberList;
 	}
 	
-	public function recordNum(){ //전체 레코드 수 
-		$recordNum = $this->memberDao->recordNum();
+	public function recordNum(Command $command){ //전체 레코드 수 
+		$recordNum = $this->memberDao->recordNum($command);
 		return $recordNum;
 	}
 }

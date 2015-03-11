@@ -29,6 +29,7 @@ class MemberDao2{
 			
 			$aCondition = array();
 			$aBindParam = array();
+			
 			if($command->getOption() == 'like'){
 				if($command->getColumn() == 'name'){
 					$aCondition[] = 'AND name LIKE :name';
@@ -60,13 +61,15 @@ class MemberDao2{
 				$stmt->bindParam($sKey, $aParam[0], $aParam[1]);				
 			}
 			
+			
 			if($stmt->execute() === FALSE){
 				$error = $stmt->errorInfo();
 				throw new PDOException();
 			}
-			
+				
+		
 			$memberList = array();
-			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+			while($row = $stmt->fetch(PDO::FETCH_ASSOC)){				
 				$oMember = new Member();
 				$oMember->setAge($row['age']);
 				$oMember->setId($row['id']);
@@ -82,26 +85,55 @@ class MemberDao2{
 	}
 	
 	
-	public function recordNum(){ //전체 레코드 수
+	public function recordNum(Command $command){ //전체 레코드 수
 		$query = '
 				SELECT
 					count(*)
 				FROM
 					member	
 				WHERE 1=1	
-				';
-				
+				';		
+		
+		$aCondition = array();
+		$aBindParam = array();
+			
+		if($command->getOption() == 'like'){
+			if($command->getColumn() == 'name'){
+				$aCondition[] = 'AND name LIKE :name';
+				$aBindParam[':name'] = array('%'.$command->getMember()->getName().'%', PDO::PARAM_STR);
+			}else if($command->getColumn() == 'id'){
+				$aCondition[] = 'AND id LIKE :id';
+				$aBindParam[':id'] = array('%'.$command->getMember()->getId().'%', PDO::PARAM_STR);
+			}
+		}else if($command->getOption() == 'equal'){
+			if($command->getColumn() == 'name'){
+				$aCondition[] = 'AND name = :name';
+				$aBindParam[':name'] = array($command->getMember()->getName(), PDO::PARAM_STR);
+			}else if($command->getColumn() == 'id'){
+				$aCondition[] = 'AND id = :id';
+				$aBindParam[':id'] = array($command->getMember()->getId(), PDO::PARAM_STR);
+			}
+		}
+			
+		if(count($aCondition)>0){
+			$query.=implode(' ', $aCondition);
+		}		
+		
 		$stmt = $this->dbo->prepare($query);
+		
+		foreach ($aBindParam as $sKey=>$aParam){
+			$stmt->bindParam($sKey, $aParam[0], $aParam[1]);
+		}
+			
 		$stmt->execute();	
 		$recordNum= $stmt->fetchColumn();
-
+		
 		if($stmt->execute()===FALSE){
 			$error=$stmt->errorInfo();
 			throw new PDOException();
 		}
 		return $recordNum;	
 	}
-
 }
 
 ?>
