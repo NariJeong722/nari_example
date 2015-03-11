@@ -1,7 +1,7 @@
 <?php
 header ( 'Content-Type: text/html; charset=utf-8' );
-
-echo "<table border='1' width='800'>";
+echo "<div>";
+echo "<div><table border='1' width='800'>";
 echo "<tr align='center'>";
 echo "<td>아이디</td>";
 echo "<td>이름</td>";
@@ -17,10 +17,12 @@ echo "</tr>";
 			echo "<td>{$oMember->getAge()}</td>";
 			echo "<td>{$oMember->getEmail()}</td>";
 			echo "</tr>";
-		}
-		echo "</table> <br>";
+		}	
 	}
-	echo "<div align='center'>";
+echo "</table>";
+echo "</div>";
+	
+echo "<div align='center'>";
  		if(	$totalPage==0){
 			echo '['."<strong>".'1'.'</strong>]';
 		}else{ 
@@ -41,7 +43,7 @@ echo "</tr>";
 			}
 		}
 				
-	echo "</div>";
+echo "</div>";
 	
 	
 
