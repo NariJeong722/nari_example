@@ -50,8 +50,7 @@
 			$("#searchBtn").click(function(){
 					getMemberList(1);
 			});
-		});
-	
+		});	
 
 		function getMemberList(page){
 			var getData = {

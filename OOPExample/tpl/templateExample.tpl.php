@@ -44,7 +44,5 @@ echo "<div align='center'>";
 		}
 				
 echo "</div>";
-	
-	
 
 ?>
